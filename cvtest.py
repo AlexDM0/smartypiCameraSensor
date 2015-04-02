@@ -14,7 +14,7 @@ with picamera.PiCamera() as camera:
             camera.capture(stream, 'bgr', use_video_port=True)
             # stream.array now contains the image data in BGR order
 
-            fgmask = fgbg.appply(stream.array)
+            fgmask = fgbg.apply(stream.array)
             cv2.imshow('frame', fgmask)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
