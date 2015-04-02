@@ -4,7 +4,7 @@ import cv2
 import picamera
 import picamera.array
 
-fgbg = cv2.BackgroundSubtractorMOG()
+fgbg = cv2.BackgroundSubtractorMOG(25, 6, 0.9, 1)
 
 with picamera.PiCamera() as camera:
     with picamera.array.PiRGBArray(camera) as stream:
@@ -14,7 +14,7 @@ with picamera.PiCamera() as camera:
             camera.capture(stream, 'bgr', use_video_port=True)
             # stream.array now contains the image data in BGR order
 
-            fgmask = fgbg.apply(stream.array)
+            fgmask = fgbg.appply(stream.array)
             cv2.imshow('frame', fgmask)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
